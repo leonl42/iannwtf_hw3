@@ -11,16 +11,20 @@ def one_hot_encode(categories,input):
               input = tf.string, which we want to encode
   """
 
+  # split the tensor containing the genome sequence into a list of tensors,
+  # each containing one character from the original sequence
   splitted = tf.strings.bytes_split(input)
   reshaped = tf.reshape(splitted,(250,))
   iterable_tensors = tf.unstack(reshaped)
 
   encoded_input = []
+
+  # iterate over the list of single character
   for data in iterable_tensors:
-    encoding_per_element = []
-    for category in categories:
-        encoding_per_element.append(int(data==category))
-    encoded_input.extend(encoding_per_element)
+
+    # for each category: 
+    # if the character equals that category append 1 and 0 otherwise
+    encoded_input.extend([int(data==category) for category in categories])
   return encoded_input
 
 
