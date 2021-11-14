@@ -3,6 +3,7 @@ from model import MyModel
 from dataloader import DataLoader
 from util import train_step, test, visualize
 import argparse
+import sys
 
 parser = argparse.ArgumentParser(description='Specify the path to the datasets as well as the number of training epochs')
 parser.add_argument('-input', type=str, help = "Path to datasets")
@@ -12,7 +13,7 @@ args = parser.parse_args()
 
 # check if input path is given by the user
 if args.input is None:
-    Exception("Please specify the loading directory for the datasets with -input when running classify.py")
+    sys.exit("Please specify the loading directory for the datasets with -input when running classify.py")
 
 # load the datasets from the given path
 dl = DataLoader()
