@@ -42,11 +42,10 @@ of the project. Here is how to run everything:
 ### Pipeline
 
 The whole pipeline can be run using one of these two options:
-- pipeline.sh
 - pipeline.py
 
 When running the whole pipeline, the working directory is not important,
-because it will be automatically set to the file path.
+because it will be automatically recognized and adapted in the file. 
 
 ### Preprocessing
 

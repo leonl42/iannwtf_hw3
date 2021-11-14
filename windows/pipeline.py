@@ -2,8 +2,8 @@ import os
 
 if __name__ == "__main__":
 
-    # set the working directory to the file directory
-    os.chdir(os.path.dirname(os.path.realpath(__file__)))
+    # get directory of this file
+    file_dir = os.path.dirname(__file__)
 
-    os.system("preprocess.py -input raw_data/ -output preprocessed_data/")
-    os.system("classify.py -input preprocessed_data/ -num_epochs 10")
+    os.system(f"{file_dir}/preprocess.py -input {file_dir}/raw_data/ -output {file_dir}/preprocessed_data/")
+    os.system(f"{file_dir}/classify.py -input {file_dir}/preprocessed_data/ -num_epochs 10")
