@@ -25,6 +25,7 @@ def one_hot_encode(categories,input):
     # for each category: 
     # if the character equals that category append 1 and 0 otherwise
     encoded_input.extend([int(data==category) for category in categories])
+
   return encoded_input
 
 
@@ -47,6 +48,7 @@ def prepare_data(ds):
   ds = ds.shuffle(5000)
   ds = ds.batch(32)
   ds = ds.prefetch(20)
+  
   return ds
 
 @tf.function
