@@ -1,5 +1,6 @@
 import tensorflow as tf
 import numpy as np
+import matplotlib.pyplot as plt
 
 @tf.function()
 def one_hot_encode(categories,input):
@@ -113,3 +114,13 @@ def test(model, test_data, loss_function):
   
   return loss, accuracy
 
+def visualize(train_l,test_l,test_acc):
+  print("visualistin in")
+  plt.figure()
+  plt.plot(train_l,label=" Train Loss")
+  plt.plot(test_l, label = " Test Loss")
+  plt.plot(test_acc, label = " Test Accuracy")
+  plt.xlabel("Training Steps")
+  plt.ylabel("Value")
+  plt.legend()
+  plt.show()

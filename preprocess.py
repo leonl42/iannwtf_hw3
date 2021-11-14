@@ -1,8 +1,6 @@
 import argparse
-import numpy as np
 from tensorflow.python.ops.gen_array_ops import reshape
 from dataloader import DataLoader
-import tensorflow as tf
 from util import prepare_data
 
 parser = argparse.ArgumentParser(description='Paths for files')

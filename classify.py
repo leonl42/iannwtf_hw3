@@ -1,12 +1,12 @@
 import tensorflow as tf
 from model import MyModel
 from dataloader import DataLoader
-from util import train_step
-from util import test
+from util import train_step, test, visualize
 import argparse
 
 parser = argparse.ArgumentParser(description='Paths for files')
 parser.add_argument('-input', type=str, help = "Path to input files")
+parser.add_argument('-num_epochs', type=int, help = "number of epochs", default=100)
 
 args = parser.parse_args()
 
@@ -19,7 +19,7 @@ test_ds = data["test"]
 tf.keras.backend.clear_session()
 
 # Hyperparameters
-num_epochs = 10
+num_epochs = args.num_epochs
 learning_rate = 0.1
 
 # Initialize the model.
@@ -60,3 +60,6 @@ for epoch in range(num_epochs):
     test_loss, test_accuracy = test(model, test_ds, cross_entropy_loss)
     test_losses.append(test_loss)
     test_accuracies.append(test_accuracy)
+
+print("visualizing...")
+visualize(train_losses,test_losses,test_accuracies)
