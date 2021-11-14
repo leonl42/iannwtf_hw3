@@ -8,7 +8,7 @@ This repository contains 2 versions of the homework. The first one can
 be found in the notebook subfolder. But because we wanted a version which is 
 able to run on linux and windows!, we made a second version which can be found in the windows
 subfolder. Due to the tfds.load command not working on windows, the second version has a slightly 
-different structure than the notebook version, which will be eloborated in the coming paragraphs
+different structure than the notebook version, which will be elaborated in the coming paragraphs.
 
 ## Colab
 
@@ -39,18 +39,19 @@ used for training and testing the model.
 The combined step of preprocessing and classification will be called the pipeline 
 of the project. Here is how to run everything:
 
+- Ensure that you are in the ../windows directory of the project when running files. 
+- All files have to be run using python -m FILE_NAME, using python FILE_NAME.py won't work!!
+
 ### Pipeline
 
-The whole pipeline can be run using one of these two options:
-- pipeline.py
+The whole pipeline can be run using:
+- python -m pipeline
 
-When running the whole pipeline, the working directory is not important,
-because it will be automatically recognized and adapted in the file. 
 
 ### Preprocessing
 
-Preprocessing can be run using
-- preprocess.py -input INPUT_PATH -output OUTPUT_PATH
+Preprocessing can be run using:
+- python -m preprocess -input INPUT_PATH -output OUTPUT_PATH
 
 Here, INPUT_PATH is the path to the datasets which should be preprocessed and
 OUTPUT_PATH the path to where the preprocessed datasets should be saved.
@@ -58,8 +59,8 @@ Both have to be specified.
 
 ### Classification
 
-Classification can be run using
-- classify.py -input INPUT_PATH -num_epochs NUM_EPOCHS
+Classification can be run using:
+- python -m classify -input INPUT_PATH -num_epochs NUM_EPOCHS
 
 Here, INPUT_PATH is the path to the datasets which should be used
 for training and testing. NUM_EPOCHS is the number of training

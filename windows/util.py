@@ -2,6 +2,10 @@ import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 
+"""
+Contains functions which will be used by other classes
+"""
+
 @tf.function()
 def one_hot_encode(categories,input):
   """
@@ -31,17 +35,20 @@ def one_hot_encode(categories,input):
 
 def prepare_data(ds):
   """
-   Preparing our data for our model.
+  Preparing our data for our model.
     Parameters:
       ds: the dataset we want to preprocess
     Returns:
       ds: preprocessed dataset
   """
 
-  ds = ds.map(lambda input, target: (one_hot_encode(["A","C","G","T"],input), tf.one_hot(target,10)))
-  ds = ds.map(lambda input, target: (tf.cast(input, tf.float32),tf.cast(target,tf.float32)))
+  # one hot encode the features and targets
+  ds = ds.map(lambda feature, target: (one_hot_encode(["A","C","G","T"],feature), tf.one_hot(target,10)))
 
-  # cache
+  # cast features and targets to float32
+  ds = ds.map(lambda feature, target: (tf.cast(feature, tf.float32),tf.cast(target,tf.float32)))
+
+  # cache the elements
   ds = ds.cache()
 
   # shuffle, batch, prefetch our dataset
