@@ -11,7 +11,7 @@ parser.add_argument('-num_epochs', type=int, help = "number of epochs", default=
 args = parser.parse_args()
 
 dl = DataLoader()
-dl.load_data("preprocessed/")
+dl.load_data(args.input)
 data = dl.get_data()
 train_ds = data["train"]
 test_ds = data["test"]
