@@ -40,10 +40,10 @@ def prepare_data(ds):
   ds = ds.map(lambda input, target: (one_hot_encode(["A","C","G","T"],input), tf.one_hot(target,10)))
   ds = ds.map(lambda input, target: (tf.cast(input, tf.float32),tf.cast(target,tf.float32)))
 
-  #cache
+  # cache
   ds = ds.cache()
 
-  #shuffle, batch, prefetch our dataset
+  # shuffle, batch, prefetch our dataset
   ds = ds.shuffle(5000)
   ds = ds.batch(32)
   ds = ds.prefetch(20)
