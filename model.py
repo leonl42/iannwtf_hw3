@@ -2,11 +2,12 @@ import tensorflow as tf
 from layer import MyDense
 
 class MyModel(tf.keras.Model):
-  """ Our own custon MLP model, which inherits from the keras.Model class
+  """ 
+  Our own custon MLP model, which inherits from the keras.Model class
 
-        Functions:
-          init: constructor of our model
-          call: performs forward pass of our model
+    Functions:
+      init: constructor of our model
+      call: performs forward pass of our model
   """
   def __init__(self):
     """
@@ -24,17 +25,19 @@ class MyModel(tf.keras.Model):
 
   def call(self, inputs):
     """
-      Performs a forward step in our MLP
+    Performs a forward step in our MLP
 
-        Args:
-          inputs: our preprocessed input data, we send through our model
-        Results:
-          output: the predicted output of our input data
+      Args:
+        inputs: our preprocessed input data, we send through our model
+      Results:
+        output: the predicted output of our input data
     """
     # first hidden layer
     x = self.dense_h1(inputs)
+
     # second hidden layer
     x = self.dense_h2(x)
+    
     # output layer
     output = self.dense_o(x)
 

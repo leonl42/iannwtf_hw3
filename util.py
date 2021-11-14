@@ -4,10 +4,12 @@ import matplotlib.pyplot as plt
 
 @tf.function()
 def one_hot_encode(categories,input):
-  """Creates an one_hot-tensor from our byte-string input.
-  Parameters: 
-            categories = categories of our input for one hot encoding 
-            input = tf.string, which we want to encode"""
+  """
+  Creates an one_hot-tensor from our byte-string input.
+    Parameters: 
+              categories = categories of our input for one hot encoding 
+              input = tf.string, which we want to encode
+  """
 
   splitted = tf.strings.bytes_split(input)
   reshaped = tf.reshape(splitted,(250,))
@@ -38,7 +40,7 @@ def prepare_data(ds):
   ds = ds.cache()
 
   #shuffle, batch, prefetch our dataset
-  ds = ds.shuffle(500)
+  ds = ds.shuffle(5000)
   ds = ds.batch(32)
   ds = ds.prefetch(20)
   return ds
@@ -46,16 +48,16 @@ def prepare_data(ds):
 @tf.function
 def train_step(model, input, target, loss_function, optimizer):
   """
-    Performs a forward and backward pass for  one dataponit of our training set
+  Performs a forward and backward pass for  one dataponit of our training set
 
-      Parameters:
-        model: our created MLP model
-        input:
-        target:
-        loss_funcion: function we used for calculating our loss
-        optimizer: our optimizer used for packpropagation
-      Results:
-        loss: our calculated loss for the datapoint
+    Parameters:
+      model: our created MLP model
+      input:
+      target:
+      loss_funcion: function we used for calculating our loss
+      optimizer: our optimizer used for packpropagation
+    Results:
+      loss: our calculated loss for the datapoint
   """
   
   with tf.GradientTape() as tape:
@@ -77,14 +79,14 @@ def train_step(model, input, target, loss_function, optimizer):
 
 def test(model, test_data, loss_function):
   """
-    Test our MLP, by going through our testing dataset, 
-    performing a forward pass and calculating loss and accuracy
+  Test our MLP, by going through our testing dataset, 
+  performing a forward pass and calculating loss and accuracy
 
-      Parameters:
-        model: our created MLP model
-        test_data: our preprocessed test dataset
-        loss_funcion: function we used for calculating our loss
-      Results:
+    Parameters:
+      model: our created MLP model
+      test_data: our preprocessed test dataset
+      loss_funcion: function we used for calculating our loss
+    Results:
 
         
   """
@@ -114,13 +116,21 @@ def test(model, test_data, loss_function):
   
   return loss, accuracy
 
-def visualize(train_l,test_l,test_acc):
-  print("visualistin in")
-  plt.figure()
-  plt.plot(train_l,label=" Train Loss")
-  plt.plot(test_l, label = " Test Loss")
-  plt.plot(test_acc, label = " Test Accuracy")
-  plt.xlabel("Training Steps")
-  plt.ylabel("Value")
-  plt.legend()
+def visualize(train_loss,test_loss,accuracy):
+  """
+  Displays training and testing loss as well as accuracy per epoch each in a line plot.
+
+    Args:
+      train_loss = mean training loss per epoch 
+      test_loss = mean testing loss per epoch
+      accuracy = mean accuracy (testing dataset) per epoch
+  """
+
+  fig, axes = plt.subplots(2)
+  line_1 = axes[0].plot(train_loss,label="  Train Loss")
+  line_2 = axes[0].plot(test_loss, label = "  Test Loss")
+  line_3 = axes[1].plot(accuracy, label = "  Test Accuracy")
+  plt.xlabel("  Training Epoch")
+  axes[0].legend()
+  axes[1].legend()
   plt.show()

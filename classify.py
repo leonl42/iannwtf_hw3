@@ -4,12 +4,17 @@ from dataloader import DataLoader
 from util import train_step, test, visualize
 import argparse
 
-parser = argparse.ArgumentParser(description='Paths for files')
-parser.add_argument('-input', type=str, help = "Path to input files")
-parser.add_argument('-num_epochs', type=int, help = "number of epochs", default=100)
+parser = argparse.ArgumentParser(description='Specify the path to the datasets as well as the number of training epochs')
+parser.add_argument('-input', type=str, help = "Path to datasets")
+parser.add_argument('-num_epochs', type=int, help = "number of training epochs", default=10)
 
 args = parser.parse_args()
 
+# check if input path is given by the user
+if args.input is None:
+    Exception("Please specify the loading directory for the datasets with -input when running classify.py")
+
+# load the datasets from the given path
 dl = DataLoader()
 dl.load_data(args.input)
 data = dl.get_data()
@@ -61,5 +66,5 @@ for epoch in range(num_epochs):
     test_losses.append(test_loss)
     test_accuracies.append(test_accuracy)
 
-print("visualizing...")
+# visualize the results
 visualize(train_losses,test_losses,test_accuracies)
